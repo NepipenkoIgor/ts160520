@@ -1,26 +1,25 @@
-function fn() {
-    throw  new Error('Ts error')
+enum Size {
+    S = 42,
+    M = 48,
+    XL = 52
 }
 
-fn();
+let size1 = Size.M;
+let size2 = Size[42];
 
-function sleep(ms: number) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, ms);
-    })
+enum UserActions {
+    DELETE = '[USER MODULE] DELETE USER!!',
+    CREATE = '[USER MODULE] CREATE USER!!',
+    REMOVE = DELETE
 }
 
-async function* getItemsReallySlowly<T>(items: Iterable<T>): AsyncIterableIterator<T> {
-    for (const item of items) {
-        await sleep(1000);
-        yield item;
+function reducer(_: any, action: UserActions) {
+    switch (action) {
+        case UserActions.CREATE : {
+            break;
+        }
+        case UserActions.DELETE : {
+            break;
+        }
     }
 }
-
-async function speakLikeSloth(items: string[]) {
-    for await (const item of getItemsReallySlowly(items)) {
-        console.log(item);
-    }
-}
-
-speakLikeSloth(['hi', 'all', 'TS', 'is', 'Awesome'])
