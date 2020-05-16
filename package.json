@@ -10,7 +10,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jquery": "^3.3.38",
+    "@types/react": "^16.9.35",
+    "css-loader": "^3.5.3",
     "html-webpack-plugin": "^4.3.0",
+    "style-loader": "^1.2.1",
     "ts-loader": "^7.0.4",
     "ts-node": "^8.10.1",
     "tslib": "^2.0.0",
