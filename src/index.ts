@@ -1,83 +1,40 @@
-// Object/Function
-
-// interface IPoint {
-//     x: number;
-//     y: number;
-// }
-//
-// type TPoint = {
-//     x: number;
-//     y: number;
-// }
-//
-// let p1: TPoint = {
-//     x: 1, y: 1
-// }
-//
-// interface ISetPoint {
-//     new (x: number, y: number): void;
-// }
-//
-// type TSetPoint =  new  (x: number, y: number) => void;
-
-
-// Extend
-type PartialPoint = {
-    x: number;
-}
-
-interface IPartialPoint {
-    y: number;
-}
-
-//type Point = PartialPoint & IPartialPoint
-
-interface Point extends PartialPoint, IPartialPoint {
-
-}
-
-let p1: Point = {
-    x: 1, y: 1
-}
-
-
-// implements >2.1 ...
-class BasePoint implements PartialPoint, IPartialPoint, snd {
-    public x: number = 10;
-    public y: number = 10;
-}
-
-//
-// const user: TAccount = {
-//     name: 'Andrew',
-//     age: 32
-// }
-//
-//
-// interface TAccount1 {
-//     name: string;
-//     info: { male: boolean }
-// }
-//
-// interface TAccount2 {
-//     age: number;
-//     info: { salary: number }
-// }
-//
-// interface IAccount extends TAccount1, TAccount2 {
-//     info: { male: boolean, salary: number }
-// }
-
-
-interface TAccount {
+interface IUser {
     name: string;
-}
-
-interface TAccount {
     age: number;
 }
 
-class Acc implements TAccount {
-    public name: string = 'Andrew';
-    public age: number = 22;
+interface IProduct {
+    name: string;
+    price: number;
 }
+
+interface ICartProduct extends IProduct {
+    count: number;
+}
+
+type TState = {
+    user: IUser,
+    products: IProduct[],
+    cart: ICartProduct[],
+}
+
+const state: TState = {
+    user: {name: 'Igor', age: 34},
+    products: [{name: 'IPhone 8', price: 200}],
+    cart: [{name: 'IPhone 8', price: 200, count: 2}]
+}
+
+type Select<State> = <Field extends keyof State>(state: State, field: Field) => State[Field];
+const select: Select<TState> = (storeState, field) => storeState[field];
+
+const user1: IUser = select(state, 'user');
+const products: IProduct[] = select(state, 'products');
+const cart: ICartProduct[] = select(state, 'cart');
+
+
+function getProperty<Obj, Key extends keyof Obj>(obj: Obj, key: Key) {
+    return obj[key];
+}
+
+const key = 'key1';
+getProperty({a: 1}, 'b')
