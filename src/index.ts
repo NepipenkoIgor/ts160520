@@ -1,42 +1,83 @@
-// const user: {
-//     readonly firstName: string,
-//     readonly age?: number;
-// } = {
-//     firstName: 'Igor',
-//     age: 34
+// Object/Function
+
+// interface IPoint {
+//     x: number;
+//     y: number;
 // }
 //
-// user.firstName = 'Andrew';
-// user.age = 32;
+// type TPoint = {
+//     x: number;
+//     y: number;
+// }
 //
-// let keys: keyof typeof user = 1;
-// let value: (typeof user)['firstName' | 'age'] = true;
+// let p1: TPoint = {
+//     x: 1, y: 1
+// }
 //
-// let hashMap: { [id: string]: typeof user } = {
-//     'asdasd123124asda': user,
-//     'asd1231241': user,
-//     'asdasd1231': user,
+// interface ISetPoint {
+//     new (x: number, y: number): void;
+// }
+//
+// type TSetPoint =  new  (x: number, y: number) => void;
+
+
+// Extend
+type PartialPoint = {
+    x: number;
+}
+
+interface IPartialPoint {
+    y: number;
+}
+
+//type Point = PartialPoint & IPartialPoint
+
+interface Point extends PartialPoint, IPartialPoint {
+
+}
+
+let p1: Point = {
+    x: 1, y: 1
+}
+
+
+// implements >2.1 ...
+class BasePoint implements PartialPoint, IPartialPoint, snd {
+    public x: number = 10;
+    public y: number = 10;
+}
+
+//
+// const user: TAccount = {
+//     name: 'Andrew',
+//     age: 32
+// }
+//
+//
+// interface TAccount1 {
+//     name: string;
+//     info: { male: boolean }
+// }
+//
+// interface TAccount2 {
+//     age: number;
+//     info: { salary: number }
+// }
+//
+// interface IAccount extends TAccount1, TAccount2 {
+//     info: { male: boolean, salary: number }
 // }
 
 
-// let arr: ReadonlyArray<number> = [1, 2, 3, 4];
-let arr: readonly number[] = [1, 2, 3, 4];
-arr[100] = 12;
-arr.push(12);
+interface TAccount {
+    name: string;
+}
 
-let tupleArr: readonly [string, number] = ['name', 1];
-tupleArr[100] = 12;
-tupleArr.push(12);
+interface TAccount {
+    age: number;
+}
 
-let str = 'const string' as const;
-let a: typeof str = 'asdasd';
-
-let arr = [1, 2, 3, 4] as const;
-
-let user1 = {
-    firstName: 'Igor',
-    age: 34
-} as const;
-
-user1.age = 33;
-
+class Acc implements TAccount {
+    public name: string = 'Andrew';
+    public age: number = 22;
+}
