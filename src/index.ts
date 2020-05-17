@@ -1,14 +1,25 @@
-import { SavePersistence } from './utils';
+import { Range, Validate } from './utils';
 
-
-class UserAccount {
-    public firstName!: string;
-
-    @SavePersistence
-    public lastName!: string;
+class Calculator {
+    @Validate
+    public updatePercentage(
+        @Range(20, 70) _oldValue: number,
+        @Range(20, 50) _newValue: number,
+    ) {
+    }
 }
 
-let user = new UserAccount();
+const calc = new Calculator();
+console.log(calc)
+calc.updatePercentage(40, 45);
 
-console.log(user.lastName);
-user.lastName = 'Nepipenko';
+setTimeout(() => {
+    calc.updatePercentage(45, 80);
+}, 5000)
+
+
+type User = { name: string } | { age: number }; // { name: string , age: number }
+
+const user: User = {
+    name: 'Andrew',
+}
