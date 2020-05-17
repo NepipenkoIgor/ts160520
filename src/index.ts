@@ -1,25 +1,14 @@
-abstract class AbstractControl<T> {
-    public abstract model: T;
-
-    public abstract getValue(): T;
+import { SavePersistence } from './utils';
 
 
-    public onFocus() {
-        // common logic;
-    }
+class UserAccount {
+    public firstName!: string;
 
-    public onBlur() {
-        // common logic;
-    }
+    @SavePersistence
+    public lastName!: string;
 }
 
+let user = new UserAccount();
 
-class MHDropDown extends AbstractControl<{ name: string, value: string }> {
-    public model = {name: '', value: ''};
-
-
-    public getValue(): { name: string; value: string } {
-        // some
-        return {name: '', value: ''};
-    }
-}
+console.log(user.lastName);
+user.lastName = 'Nepipenko';
